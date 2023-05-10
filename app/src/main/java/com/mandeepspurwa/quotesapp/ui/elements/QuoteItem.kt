@@ -1,6 +1,7 @@
 package com.mandeepspurwa.quotesapp.ui.elements
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,16 +30,21 @@ import com.mandeepspurwa.quotesapp.data.model.Quote
  **/
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun QuoteItem(quote: Quote) {
+fun QuoteItem(quote: Quote, onClick: () -> Unit) {
     val gradientColors = listOf(Color.Cyan, Color.Blue)
     Card(
         elevation = CardDefaults.cardElevation(8.dp),
         modifier = Modifier
             .padding(7.dp)
-            .border(width = 1.dp, brush = Brush.linearGradient(gradientColors), shape = RoundedCornerShape(10.dp)),
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(gradientColors),
+                shape = RoundedCornerShape(10.dp)
+            )
+            .clickable { onClick()}
 
 
-        ) {
+    ) {
         Column(modifier = Modifier.padding(10.dp)) {
             Text(
                 text = quote.quote,
@@ -55,5 +61,5 @@ fun QuoteItem(quote: Quote) {
 @Preview
 @Composable
 fun PreviewQuoteItem() {
-    QuoteItem(Quote("quote here", "author name"))
+    QuoteItem(Quote("quote here", "author name")){}
 }
