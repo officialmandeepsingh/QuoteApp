@@ -10,6 +10,8 @@ import androidx.navigation.NavHostController
 import com.mandeepspurwa.quotesapp.data.model.Quote
 import com.mandeepspurwa.quotesapp.data.repository.QuotesData
 import com.mandeepspurwa.quotesapp.ui.elements.QuoteItem
+import com.mandeepspurwa.quotesapp.ui.navigation.Route
+import com.mandeepspurwa.quotesapp.ui.navigation.Screens
 
 /**
  * App Name: Quotes App
@@ -42,7 +44,7 @@ fun QuoteList(navController: NavHostController?) {
             QuoteItem(quote = it) {
                 Log.d("TAG", "QuoteList() called: ${index}")
                 Log.d("TAG", "QuoteList() called: ${QuotesData.data.get(index).toString()}")
-
+                navController?.navigate("${Screens.Quote_Details.route.name}/${index}")
             }
         }
     }

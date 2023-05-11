@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.mandeepspurwa.quotesapp.ui.screen.QuoteDetail
 import com.mandeepspurwa.quotesapp.ui.screen.QuoteList
 
 /**
@@ -24,9 +25,14 @@ fun Navigation(navHostController: NavHostController) {
         composable(Screens.Home.route.name) { QuoteList(navHostController) }
         composable(
             "${Screens.Quote_Details.route.name}/{quoteId}",
-            arguments = listOf(navArgument("userId") { type = NavType.StringType })
+            arguments = listOf(navArgument("quoteId") { type = NavType.StringType })
         ) {
-            QuoteList(navHostController)
+            QuoteDetail(navHostController)
+        }
+        composable(
+            "${Screens.Quote_Details.route.name}"
+        ) {
+            QuoteDetail(navHostController)
         }
     }
 }
