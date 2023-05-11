@@ -7,17 +7,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.mandeepspurwa.quotesapp.data.repository.DataRepository
+import com.mandeepspurwa.quotesapp.ui.navigation.Navigation
 import com.mandeepspurwa.quotesapp.ui.screen.QuoteList
 import com.mandeepspurwa.quotesapp.ui.theme.QuotesAppTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +27,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    MyApp()
+//                    Greeting(name = "demo")
                 }
             }
         }
@@ -38,9 +36,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun MyApp(){
+    val navController = rememberNavController()
+    Navigation(navHostController = navController)
+}
+@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Log.d("TAG", "load Data: ${DataRepository.quotesList.size} ")
-    QuoteList()
+    QuoteList(rememberNavController())
 }
 
 @Preview(showBackground = true)
